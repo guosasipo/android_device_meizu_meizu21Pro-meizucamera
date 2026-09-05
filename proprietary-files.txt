@@ -1,0 +1,2 @@
+# Camera
+system/app/Camera/Camera.apk:system/priv-app/MeizuCamera/MeizuCamera.apk;PRESIGNED;OVERRIDES=Aperture
