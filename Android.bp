@@ -1,0 +1,84 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+soong_namespace {
+}
+
+cc_library_shared {
+    name: "libOpenCL_meizucamera",
+    stem: "libOpenCL",
+    vendor: true,
+    installable: false,
+    compile_multilib: "64",
+    vendor_public_library: {
+        symbol_file: "libOpenCL.map.txt",
+        unversioned: true,
+    },
+}
+
+cc_library_shared {
+    name: "libcdsprpc_meizucamera",
+    stem: "libcdsprpc",
+    vendor: true,
+    installable: false,
+    compile_multilib: "64",
+    vendor_public_library: {
+        symbol_file: "libcdsprpc.map.txt",
+        unversioned: true,
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "libc++_shared_meizucamera",
+    stem: "libc++_shared",
+    srcs: [":ndk_libc++_shared"],
+    compile_multilib: "64",
+    sdk_version: "minimum",
+    stl: "none",
+    strip: {
+        none: true,
+    },
+}
+
+genrule {
+    name: "meizucamera_filter_assets",
+    srcs: ["//vendor/meizu/meizu21Pro-meizucamera:meizucamera_filter_archive"],
+    tools: ["zipsync"],
+    out: [
+        "classicFilter/camera_fanchanuan.webp",
+        "classicFilter/camera_fanchanuanfront.webp",
+        "classicFilter/camera_fanchase.webp",
+        "classicFilter/camera_fanchasefront.webp",
+        "classicFilter/camera_nense.webp",
+        "classicFilter/camera_nensefront.webp",
+        "classicFilter/camera_nuanse.webp",
+        "classicFilter/camera_nuansefront.webp",
+        "classicFilter/camera_xianming.webp",
+        "classicFilter/camera_xianmingfront.webp",
+        "classicFilter/filtertable_rgb_second_02.png",
+        "classicFilter/filtertable_rgb_second_04.png",
+        "classicFilter/filtertable_rgb_second_06.png",
+        "classicFilter/filtertable_rgb_second_07.png",
+        "classicFilter/filtertable_rgb_second_bw.jpg",
+        "classicFilter/filtertable_rgb_second_cloudy.jpg",
+        "classicFilter/filtertable_rgb_second_dew.jpg",
+        "classicFilter/filtertable_rgb_second_maroon.jpg",
+        "classicFilter/filtertable_rgb_second_orange.jpg",
+        "classicFilter/filtertable_rgb_second_sky.jpg",
+        "classicFilter/filtertable_rgb_second_vine.jpg",
+        "filterManager/0850def931de633b75241dfb53876d4b",
+        "filterManager/0c258f511a478fb0e6a7a357fd1542de",
+        "filterManager/2109544a504290bf193a963f2584e775",
+        "filterManager/25e4a32625170c912305279cf43783cb",
+        "filterManager/3df02e4f57e0afc14915c80c97ed62e4",
+        "filterManager/50041e2bc3dcb4ec4ce2624e391ad7a9",
+        "filterManager/5ad70a805cc641d4ad3b86eda8dfc741",
+        "filterManager/62dc1457bf83d88df5b14688331e5fa4",
+        "filterManager/85e08bb564376bc0d01f607954b88209",
+        "filterManager/d0f3ebc977be03d1816fc3226ab85c29",
+        "filterManager/ea04602e9f09f94da49315aca37c82d0",
+    ],
+    cmd: "$(location zipsync) -d $(genDir) $(in)",
+}

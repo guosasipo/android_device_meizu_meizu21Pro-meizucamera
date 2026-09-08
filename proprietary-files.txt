@@ -1,2 +1,23 @@
 # Camera
-system/app/Camera/Camera.apk:system/priv-app/MeizuCamera/MeizuCamera.apk;PRESIGNED;OVERRIDES=Aperture
+system/app/Camera/Camera.apk:system/priv-app/MeizuCamera/MeizuCamera.apk;OVERRIDES=Aperture;REQUIRED=meizu-camera-performance,meizu-camera-performance.xml,libmeizu_camera_performance_jni
+
+# Camera algorithms
+system/lib64/libarcsoft_ai_moon.so
+system/lib64/libarcsoft_dualcam_refocus_image.so
+system/lib64/libarcsoft_fringe_remove.so
+system/lib64/libarcsoft_qnnhtp.so;MODULE_SUFFIX=_meizucamera
+system/lib64/libarcsoft_scbokeh_image.so
+system/lib64/libarcsoft_scbokeh_preview.so
+system/lib64/libarcsoft_supernight.so
+system/lib64/libmpbase.so;MODULE_SUFFIX=_meizucamera
+system/lib64/libopencv_java4.so
+system/lib64/libscanner.so
+
+# Camera postprocessing
+system/priv-app/PhotoService/PhotoService.apk:system/app/MeizuPhotoService/MeizuPhotoService.apk
+system/lib64/libjni_offlinepostproc.so
+system/lib64/vendor.qti.hardware.camera.postproc-V1-ndk.so:system/lib64/vendor.qti.hardware.camera.postproc-V1-ndk-meizu.so;FIX_SONAME
+system/media/aiscene_model.tflite
+
+# Camera filter assets
+system/priv-app/FlymeGallery/FlymeGallery.apk:system/etc/meizucamera/filters.zip;EXTRACT_ONLY;FILEGROUP=meizucamera_filter_archive

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.meizu.pps">
+
+    <application
+        android:allowBackup="false"
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true"
+        android:hasCode="true">
+        <uses-native-library
+            android:name="libqti-perfd-client.so"
+            android:required="true" />
+
+        <provider
+            android:name="org.lineageos.meizucamera.filters.FilterProvider"
+            android:authorities="com.meizu.media.gallery.filtercomp;com.meizu.media.gallery.classic-filtermanager;com.meizu.media.gallery.filtermanager"
+            android:exported="true"
+            android:permission="com.meizu.media.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+            android:grantUriPermissions="true"
+            android:initOrder="100"
+            android:multiprocess="false" />
+
+        <service
+            android:name="com.meizu.perf.sdk.BoostAffinityService"
+            android:directBootAware="true"
+            android:exported="true"
+            android:permission="com.meizu.media.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    </application>
+</manifest>

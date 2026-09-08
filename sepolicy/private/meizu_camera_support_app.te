@@ -1,0 +1,7 @@
+type meizu_camera_support_app, domain, coredomain;
+app_domain(meizu_camera_support_app)
+
+hal_client_domain(meizu_camera_support_app, vendor_hal_perf)
+
+allow meizu_camera_support_app app_api_service:service_manager find;
+allow meizu_camera_support_app meizu_camera_app:dir getattr;

@@ -1,0 +1,55 @@
+--- a/smali_classes2/com/meizu/media/camera/impl/CamModuleEfffectDataListenerImpl.smali
++++ b/smali_classes2/com/meizu/media/camera/impl/CamModuleEfffectDataListenerImpl.smali
+@@ -376,23 +376,9 @@
+     .line 120
+     .line 121
+     .line 122
+-    invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
+-
+-    .line 123
+-    .line 124
+-    .line 125
+-    move-result-object p1
++    invoke-static {}, Landroid/os/Process;->myTid()I
+ 
+-    .line 126
+-    invoke-virtual {p1}, Ljava/lang/Thread;->getId()J
+-
+-    .line 127
+-    .line 128
+-    .line 129
+-    move-result-wide p1
+-
+-    .line 130
+-    long-to-int p1, p1
++    move-result p1
+ 
+     .line 131
+     iget-object p2, p0, Lcom/meizu/media/camera/impl/CamModuleEfffectDataListenerImpl;->TAG:Lcom/meizu/base/utils/b$a;
+@@ -1125,24 +1111,10 @@
+     .line 6
+     .line 7
+     .line 8
+-    invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
++    invoke-static {}, Landroid/os/Process;->myTid()I
+ 
+-    .line 9
+-    .line 10
+-    .line 11
+-    move-result-object v0
++    move-result v0
+ 
+-    .line 12
+-    invoke-virtual {v0}, Ljava/lang/Thread;->getId()J
+-
+-    .line 13
+-    .line 14
+-    .line 15
+-    move-result-wide v0
+-
+-    .line 16
+-    long-to-int v0, v0
+-
+     .line 17
+     iget-object v1, p0, Lcom/meizu/media/camera/impl/CamModuleEfffectDataListenerImpl;->TAG:Lcom/meizu/base/utils/b$a;
+ 

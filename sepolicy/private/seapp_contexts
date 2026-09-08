@@ -1,0 +1,2 @@
+user=_app seinfo=platform isPrivApp=true name=com.meizu.media.camera domain=meizu_camera_app type=privapp_data_file levelFrom=user
+user=_app seinfo=platform name=com.meizu.pps domain=meizu_camera_support_app type=app_data_file levelFrom=user

@@ -1,0 +1,24 @@
+type meizu_camera_app, domain, coredomain;
+app_domain(meizu_camera_app)
+net_domain(meizu_camera_app)
+bluetooth_domain(meizu_camera_app)
+
+typeattribute meizu_camera_app hal_camera_client;
+
+hal_client_domain(meizu_camera_app, vendor_hal_qspmhal)
+hal_client_domain(meizu_camera_app, vendor_hal_perf)
+
+allow meizu_camera_app {
+    app_api_service
+    system_api_service
+    audioserver_service
+    cameraserver_service
+    mediaextractor_service
+    mediametrics_service
+    mediaserver_service
+    radio_service
+}:service_manager find;
+
+domain_auto_trans(meizu_camera_app, rs_exec, rs)
+allow rs meizu_camera_app:fd use;
+allow meizu_camera_app app_exec_data_file:file { r_file_perms execute unlink };

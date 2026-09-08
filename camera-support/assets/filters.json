@@ -1,0 +1,33 @@
+{
+  "classic": [
+    {"id": 0, "name": "Classic Chrome", "file": "classicFilter/filtertable_rgb_second_02.png", "front": "classicFilter/filtertable_rgb_second_02.png"},
+    {"id": 1, "name": "Natural Color", "file": "classicFilter/filtertable_rgb_second_04.png", "front": "classicFilter/filtertable_rgb_second_04.png"},
+    {"id": 2, "name": "Gilded Vintage", "file": "classicFilter/filtertable_rgb_second_06.png", "front": "classicFilter/filtertable_rgb_second_06.png"},
+    {"id": 3, "name": "Silver Halide", "file": "classicFilter/filtertable_rgb_second_07.png", "front": "classicFilter/filtertable_rgb_second_07.png"},
+    {"id": 4, "name": "Fresh", "file": "classicFilter/camera_xianming.webp", "front": "classicFilter/camera_xianmingfront.webp"},
+    {"id": 5, "name": "Cherry", "file": "classicFilter/filtertable_rgb_second_dew.jpg", "front": "classicFilter/filtertable_rgb_second_dew.jpg"},
+    {"id": 6, "name": "B/W", "file": "classicFilter/filtertable_rgb_second_bw.jpg", "front": "classicFilter/filtertable_rgb_second_bw.jpg"},
+    {"id": 7, "name": "Fair", "file": "classicFilter/camera_fanchase.webp", "front": "classicFilter/camera_fanchasefront.webp"},
+    {"id": 8, "name": "Quiet", "file": "classicFilter/camera_nense.webp", "front": "classicFilter/camera_nensefront.webp"},
+    {"id": 9, "name": "Warm", "file": "classicFilter/filtertable_rgb_second_vine.jpg", "front": "classicFilter/filtertable_rgb_second_vine.jpg"},
+    {"id": 10, "name": "Sweet", "file": "classicFilter/filtertable_rgb_second_orange.jpg", "front": "classicFilter/filtertable_rgb_second_orange.jpg"},
+    {"id": 11, "name": "Fresh", "file": "classicFilter/filtertable_rgb_second_sky.jpg", "front": "classicFilter/filtertable_rgb_second_sky.jpg"},
+    {"id": 12, "name": "Vivid", "file": "classicFilter/camera_nuanse.webp", "front": "classicFilter/camera_nuansefront.webp"},
+    {"id": 13, "name": "Retro", "file": "classicFilter/filtertable_rgb_second_cloudy.jpg", "front": "classicFilter/filtertable_rgb_second_cloudy.jpg"},
+    {"id": 14, "name": "Sunrise", "file": "classicFilter/camera_fanchanuan.webp", "front": "classicFilter/camera_fanchanuanfront.webp"},
+    {"id": 15, "name": "Rococo", "file": "classicFilter/filtertable_rgb_second_maroon.jpg", "front": "classicFilter/filtertable_rgb_second_maroon.jpg"}
+  ],
+  "user": [
+    {"id": 1, "name": "糖果之恋", "nameTc": "糖果之戀", "nameEn": "Candy Love", "md5": "85e08bb564376bc0d01f607954b88209"},
+    {"id": 2, "name": "森林之秘", "nameTc": "森林之祕", "nameEn": "Secret Forest", "md5": "5ad70a805cc641d4ad3b86eda8dfc741"},
+    {"id": 3, "name": "隐秘角落", "nameTc": "隱祕角落", "nameEn": "Hidden Corner", "md5": "2109544a504290bf193a963f2584e775"},
+    {"id": 4, "name": "港风", "nameTc": "港風", "nameEn": "Hong Kong Style", "md5": "d0f3ebc977be03d1816fc3226ab85c29"},
+    {"id": 5, "name": "电影质感", "nameTc": "電影質感", "nameEn": "Film Texture", "md5": "50041e2bc3dcb4ec4ce2624e391ad7a9"},
+    {"id": 6, "name": "赛博朋克", "nameTc": "賽博朋克", "nameEn": "Cyberpunk", "md5": "3df02e4f57e0afc14915c80c97ed62e4"},
+    {"id": 7, "name": "黑夜鎏金", "nameTc": "黑夜鎏金", "nameEn": "Gilded Night", "md5": "ea04602e9f09f94da49315aca37c82d0"},
+    {"id": 8, "name": "黑金蓝冰", "nameTc": "黑金藍冰", "nameEn": "Black Gold", "md5": "0c258f511a478fb0e6a7a357fd1542de"},
+    {"id": 9, "name": "秋意胶片", "nameTc": "秋意膠片", "nameEn": "Autumn Film", "md5": "0850def931de633b75241dfb53876d4b"},
+    {"id": 10, "name": "日系黄调", "nameTc": "日系黃調", "nameEn": "Yellow Tone", "md5": "25e4a32625170c912305279cf43783cb"},
+    {"id": 11, "name": "巷陌故事", "nameTc": "巷陌故事", "nameEn": "Alley Stories", "md5": "62dc1457bf83d88df5b14688331e5fa4"}
+  ]
+}

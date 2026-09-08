@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<permissions>
+    <library
+        name="com.qualcomm.qti.Performance"
+        file="/system/framework/meizu-camera-performance.jar" />
+</permissions>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+-->
+<permissions>
+    <privapp-permissions package="com.meizu.media.camera">
+        <permission name="android.permission.CONTROL_DEVICE_LIGHTS" />
+        <deny-permission name="android.permission.BACKUP" />
+        <deny-permission name="android.permission.BLUETOOTH_PRIVILEGED" />
+        <deny-permission name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
+        <deny-permission name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <deny-permission name="android.permission.STATUS_BAR" />
+        <deny-permission name="android.permission.TETHER_PRIVILEGED" />
+        <deny-permission name="android.permission.UPDATE_DEVICE_STATS" />
+        <deny-permission name="android.permission.WRITE_SECURE_SETTINGS" />
+    </privapp-permissions>
+</permissions>

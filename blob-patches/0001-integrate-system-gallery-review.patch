@@ -1,0 +1,303 @@
+diff --git a/smali_classes2/com/meizu/media/camera/CameraActivity.smali b/smali_classes2/com/meizu/media/camera/CameraActivity.smali
+index e9c285c..2603a06 100644
+--- a/smali_classes2/com/meizu/media/camera/CameraActivity.smali
++++ b/smali_classes2/com/meizu/media/camera/CameraActivity.smali
+@@ -129,6 +129,16 @@
+ 
+ .field private mLastUri:Landroid/net/Uri;
+ 
++.field private final mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
++    .annotation system Ldalvik/annotation/Signature;
++        value = {
++            "Ljava/util/concurrent/CopyOnWriteArrayList<",
++            "Landroid/net/Uri;",
++            ">;"
++        }
++    .end annotation
++.end field
++
+ .field private mLocPermissionCallback:Landroidx/activity/result/ActivityResultCallback;
+     .annotation system Ldalvik/annotation/Signature;
+         value = {
+@@ -500,6 +510,12 @@
+     .line 146
+     iput-object v0, p0, Lcom/meizu/media/camera/CameraActivity;->mAutoBrightnessObserver:Landroid/database/ContentObserver;
+ 
++    new-instance v0, Ljava/util/concurrent/CopyOnWriteArrayList;
++
++    invoke-direct {v0}, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>()V
++
++    iput-object v0, p0, Lcom/meizu/media/camera/CameraActivity;->mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
++
+     .line 147
+     .line 148
+     return-void
+@@ -3669,7 +3685,7 @@
+ .end method
+ 
+ .method public gotoGallery(Landroid/net/Uri;Landroid/graphics/Rect;)V
+-    .locals 6
++    .locals 9
+ 
+     .line 1
+     sget-object v0, Lcom/meizu/media/camera/CameraActivity;->TAG:Lcom/meizu/base/utils/b$a;
+@@ -4067,68 +4083,109 @@
+     .line 195
+     .line 196
+     .line 197
+-    sget-object p1, Landroid/provider/MediaStore$Images$Media;->EXTERNAL_CONTENT_URI:Landroid/net/Uri;
++    iget-object p1, p0, Lcom/meizu/media/camera/CameraActivity;->mLastUri:Landroid/net/Uri;
+ 
+-    .line 198
+-    .line 199
+-    invoke-virtual {p1}, Landroid/net/Uri;->buildUpon()Landroid/net/Uri$Builder;
++    .line 222
++    .line 223
++    const-string v0, "android.provider.action.REVIEW"
+ 
+-    .line 200
+-    .line 201
+-    .line 202
+-    move-result-object p1
++    iget-boolean v3, p0, Lcom/meizu/media/camera/a;->mSecureCamera:Z
+ 
+-    .line 203
+-    invoke-static {}, Lcom/meizu/media/camera/Storage;->getStorage()Lcom/meizu/media/camera/Storage;
++    if-eqz v3, :gallery_action_ready
+ 
+-    .line 204
+-    .line 205
+-    .line 206
+-    move-result-object p2
++    iget-object v4, p0, Lcom/meizu/media/camera/CameraActivity;->mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
+ 
+-    .line 207
+-    invoke-virtual {p2}, Lcom/meizu/media/camera/Storage;->generateBucketId()Ljava/lang/String;
++    invoke-virtual {v4, p1}, Ljava/util/concurrent/CopyOnWriteArrayList;->contains(Ljava/lang/Object;)Z
+ 
+-    .line 208
+-    .line 209
+-    .line 210
+-    move-result-object p2
++    move-result v4
+ 
+-    .line 211
+-    const-string v0, "bucketId"
++    if-nez v4, :secure_media_tracked
+ 
+-    .line 212
+-    .line 213
+-    invoke-virtual {p1, v0, p2}, Landroid/net/Uri$Builder;->appendQueryParameter(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri$Builder;
++    invoke-virtual {p0}, Lcom/meizu/media/camera/CameraActivity;->R0()V
+ 
+-    .line 214
+-    .line 215
+-    .line 216
+-    move-result-object p1
++    const/4 v4, 0x0
+ 
+-    .line 217
+-    invoke-virtual {p1}, Landroid/net/Uri$Builder;->build()Landroid/net/Uri;
++    iput-object v4, p0, Lcom/meizu/media/camera/CameraActivity;->mLastUri:Landroid/net/Uri;
+ 
+-    .line 218
+-    .line 219
+-    .line 220
+-    move-result-object p1
++    iput-boolean v4, p0, Lcom/meizu/media/camera/CameraActivity;->mIsGotoGallery:Z
++
++    return-void
+ 
++    :secure_media_tracked
++
++    const-string v0, "android.provider.action.REVIEW_SECURE"
++
++    :gallery_action_ready
+     .line 221
+     new-instance p2, Landroid/content/Intent;
+ 
+-    .line 222
+-    .line 223
+-    const-string v0, "android.intent.action.VIEW"
+-
+     .line 224
+     .line 225
+     invoke-direct {p2, v0, p1}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+ 
++    :try_start_2
++    if-eqz v3, :secure_clip_ready
++
++    iget-object v3, p0, Lcom/meizu/media/camera/CameraActivity;->mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
++
++    invoke-virtual {v3}, Ljava/util/concurrent/CopyOnWriteArrayList;->toArray()[Ljava/lang/Object;
++
++    move-result-object v3
++
++    array-length v4, v3
++
++    const/4 v5, 0x0
++
++    const/4 v6, 0x0
++
++    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
++
++    move-result-object v8
++
++    :secure_clip_loop
++    if-ge v5, v4, :secure_clip_done
++
++    aget-object v7, v3, v5
++
++    check-cast v7, Landroid/net/Uri;
++
++    invoke-virtual {p1, v7}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
++
++    move-result v0
++
++    if-nez v0, :secure_clip_next
++
++    if-nez v6, :secure_clip_add
++
++    invoke-static {v8, v6, v7}, Landroid/content/ClipData;->newUri(Landroid/content/ContentResolver;Ljava/lang/CharSequence;Landroid/net/Uri;)Landroid/content/ClipData;
++
++    move-result-object v6
++
++    goto :secure_clip_next
++
++    :secure_clip_add
++    new-instance v0, Landroid/content/ClipData$Item;
++
++    invoke-direct {v0, v7}, Landroid/content/ClipData$Item;-><init>(Landroid/net/Uri;)V
++
++    invoke-virtual {v6, v8, v0}, Landroid/content/ClipData;->addItem(Landroid/content/ContentResolver;Landroid/content/ClipData$Item;)V
++
++    :secure_clip_next
++    add-int/lit8 v5, v5, 0x1
++
++    goto :secure_clip_loop
++
++    :secure_clip_done
++    if-eqz v6, :secure_clip_ready
++
++    invoke-virtual {p2, v6}, Landroid/content/Intent;->setClipData(Landroid/content/ClipData;)V
++
++    :secure_clip_ready
++
+     .line 226
+     .line 227
+     .line 228
+-    const/high16 v0, 0x4000000
++    const v0, 0x4000001
+ 
+     .line 229
+     .line 230
+@@ -4137,16 +4194,40 @@
+     .line 231
+     .line 232
+     .line 233
+-    :try_start_2
+-    invoke-virtual {p0, p2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
++    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+ 
+-    .line 234
+-    .line 235
+-    .line 236
+-    iput-boolean v2, p0, Lcom/meizu/media/camera/CameraActivity;->mIsGotoGallery:Z
++    move-result-object v0
++
++    invoke-virtual {v0, p1}, Landroid/content/ContentResolver;->getType(Landroid/net/Uri;)Ljava/lang/String;
++
++    move-result-object v0
++
++    invoke-virtual {p2, p1, v0}, Landroid/content/Intent;->setDataAndType(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;
++
++    invoke-virtual {p0, p2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
+     :try_end_2
++    .catch Landroid/content/ActivityNotFoundException; {:try_start_2 .. :try_end_2} :catch_review_missing
+     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_1
+ 
++    goto :gallery_started
++
++    :catch_review_missing
++    iget-boolean v0, p0, Lcom/meizu/media/camera/a;->mSecureCamera:Z
++
++    if-nez v0, :catch_1
++
++    :try_start_gallery_view
++    const-string v0, "android.intent.action.VIEW"
++
++    invoke-virtual {p2, v0}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
++
++    invoke-virtual {p0, p2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
++    :try_end_gallery_view
++    .catch Ljava/lang/Exception; {:try_start_gallery_view .. :try_end_gallery_view} :catch_1
++
++    :gallery_started
++    iput-boolean v2, p0, Lcom/meizu/media/camera/CameraActivity;->mIsGotoGallery:Z
++
+     .line 237
+     .line 238
+     goto :goto_2
+@@ -4621,6 +4702,42 @@
+     return-void
+ .end method
+ 
++.method private rememberSecureMedia(Landroid/net/Uri;Ljava/lang/String;)V
++    .locals 2
++
++    const-string v0, "image/"
++
++    invoke-virtual {p2, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v0
++
++    if-nez v0, :remember_secure_media
++
++    const-string/jumbo v0, "video/"
++
++    invoke-virtual {p2, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v0
++
++    if-eqz v0, :remember_secure_media_done
++
++    :remember_secure_media
++    iget-boolean v0, p0, Lcom/meizu/media/camera/a;->mSecureCamera:Z
++
++    if-eqz v0, :remember_secure_media_done
++
++    iget-object v0, p0, Lcom/meizu/media/camera/CameraActivity;->mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
++
++    invoke-virtual {v0, p1}, Ljava/util/concurrent/CopyOnWriteArrayList;->remove(Ljava/lang/Object;)Z
++
++    const/4 v1, 0x0
++
++    invoke-virtual {v0, v1, p1}, Ljava/util/concurrent/CopyOnWriteArrayList;->add(ILjava/lang/Object;)V
++
++    :remember_secure_media_done
++    return-void
++.end method
++
+ .method public notifyNewMedia(Landroid/net/Uri;)V
+     .locals 5
+ 
+@@ -4751,6 +4868,8 @@
+     :cond_1
+     iput-object p1, p0, Lcom/meizu/media/camera/CameraActivity;->mCurrentUri:Landroid/net/Uri;
+ 
++    invoke-direct {p0, p1, v2}, Lcom/meizu/media/camera/CameraActivity;->rememberSecureMedia(Landroid/net/Uri;Ljava/lang/String;)V
++
+     .line 66
+     .line 67
+     const-string/jumbo v3, "video/"
+@@ -6260,6 +6379,10 @@
+     .line 12
+     invoke-virtual {v0}, Lcom/meizu/media/camera/MzCamModule;->resetSecureCameraCaptureTime()V
+ 
++    iget-object v1, p0, Lcom/meizu/media/camera/CameraActivity;->mSecureMediaUris:Ljava/util/concurrent/CopyOnWriteArrayList;
++
++    invoke-virtual {v1}, Ljava/util/concurrent/CopyOnWriteArrayList;->clear()V
++
+     .line 13
+     .line 14
+     .line 15

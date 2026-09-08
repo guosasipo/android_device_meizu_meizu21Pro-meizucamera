@@ -1,0 +1,12 @@
+LIBCDSPRPC {
+    global:
+        HAP_debug_runtime;
+        HAP_debug_v2;
+        remote_handle64_close;
+        remote_handle64_invoke;
+        remote_handle64_open;
+        rpcmem_alloc;
+        rpcmem_free;
+    local:
+        *;
+};

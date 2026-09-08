@@ -1,0 +1,9 @@
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -109,4 +109,6 @@
+     <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:enableOnBackInvokedCallback="true" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:icon="@mipmap/ic_launcher_camera_round" android:label="@string/app_name" android:largeHeap="true" android:name="com.meizu.media.camera.app.CameraApp" android:networkSecurityConfig="@xml/network_security_config" android:resizeableActivity="false" android:restoreAnyVersion="true" android:roundIcon="@mipmap/ic_launcher_camera_round" android:supportsRtl="true" android:theme="@style/Theme.CameraBase">
++        <uses-library android:name="com.qualcomm.qti.Performance" android:required="true"/>
++        <uses-native-library android:name="libqti-perfd-client.so" android:required="true"/>
+         <uses-native-library android:name="libOpenCL.so" android:required="false"/>
+         <uses-native-library android:name="libcdsprpc.so" android:required="false"/>
+         <uses-native-library android:name="libeva.so" android:required="false"/>

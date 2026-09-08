@@ -1,0 +1,54 @@
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+
+cc_library_shared {
+    name: "libmeizu_camera_performance_jni",
+    srcs: ["jni/Performance.c"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+    ],
+    header_libs: ["jni_headers"],
+    min_sdk_version: "35",
+    sdk_version: "current",
+    shared_libs: [
+        "libdl",
+        "liblog",
+    ],
+    compile_multilib: "64",
+}
+
+java_library {
+    name: "meizu-camera-performance",
+    stem: "meizu-camera-performance",
+    provides_uses_lib: "com.qualcomm.qti.Performance",
+    srcs: ["performance/src/**/*.java"],
+    installable: true,
+    sdk_version: "current",
+    min_sdk_version: "35",
+}
+
+prebuilt_etc {
+    name: "meizu-camera-performance.xml",
+    src: "performance/com.qualcomm.qti.Performance.xml",
+    filename_from_src: true,
+    sub_dir: "permissions",
+}
+
+android_app {
+    name: "MeizuCameraSupport",
+    srcs: [
+        "src/**/*.aidl",
+        "src/**/*.java",
+    ],
+    manifest: "AndroidManifest.xml",
+    certificate: "platform",
+    sdk_version: "current",
+    min_sdk_version: "35",
+    asset_dirs: ["assets"],
+    assets: [":meizucamera_filter_assets"],
+    aaptflags: ["--no-compress"],
+    jni_libs: ["libmeizu_camera_performance_jni"],
+    use_embedded_native_libs: true,
+}
