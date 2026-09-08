@@ -1,0 +1,97 @@
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali
+@@ -52130,6 +52130,28 @@
+ 
+ .method public final h8(Landroid/hardware/camera2/CaptureRequest$Builder;J)V
+     .locals 3
++
++    :try_start_video_client_identity
++    new-instance v0, Landroid/hardware/camera2/CaptureRequest$Key;
++
++    const-string v1, "com.meizu.device.package_name"
++
++    const-class v2, Ljava/lang/String;
++
++    invoke-direct {v0, v1, v2}, Landroid/hardware/camera2/CaptureRequest$Key;-><init>(Ljava/lang/String;Ljava/lang/Class;)V
++
++    iget-object v1, p0, Lcom/meizu/media/camera/camcontroller/i0;->K:Landroid/hardware/camera2/CaptureRequest$Builder;
++
++    invoke-static {p1, v0, v1}, Lcom/meizu/media/camera/util/CameraKeyExKt;->copy(Landroid/hardware/camera2/CaptureRequest$Builder;Landroid/hardware/camera2/CaptureRequest$Key;Landroid/hardware/camera2/CaptureRequest$Builder;)V
++    :try_end_video_client_identity
++    .catch Ljava/lang/IllegalArgumentException; {:try_start_video_client_identity .. :try_end_video_client_identity} :video_client_identity_unsupported
++
++    goto :video_client_identity_ready
++
++    :video_client_identity_unsupported
++    move-exception v0
++
++    :video_client_identity_ready
+ 
+     .line 1
+     iget-object v0, p0, Lcom/meizu/media/camera/camcontroller/i0;->y1:Lcom/meizu/media/camera/manual/ManualParamManager;
+@@ -57425,6 +57425,27 @@
+ 
+     .line 6
+     :cond_0
++    :try_start_client_identity_request
++    new-instance v0, Landroid/hardware/camera2/CaptureRequest$Key;
++
++    const-string v1, "com.meizu.device.package_name"
++
++    const-class v2, Ljava/lang/String;
++
++    invoke-direct {v0, v1, v2}, Landroid/hardware/camera2/CaptureRequest$Key;-><init>(Ljava/lang/String;Ljava/lang/Class;)V
++
++    iget-object v1, p0, Lcom/meizu/media/camera/camcontroller/i0;->K:Landroid/hardware/camera2/CaptureRequest$Builder;
++
++    invoke-static {p1, v0, v1}, Lcom/meizu/media/camera/util/CameraKeyExKt;->copy(Landroid/hardware/camera2/CaptureRequest$Builder;Landroid/hardware/camera2/CaptureRequest$Key;Landroid/hardware/camera2/CaptureRequest$Builder;)V
++    :try_end_client_identity_request
++    .catch Ljava/lang/IllegalArgumentException; {:try_start_client_identity_request .. :try_end_client_identity_request} :client_identity_request_unsupported
++
++    goto :client_identity_request_ready
++
++    :client_identity_request_unsupported
++    move-exception v0
++
++    :client_identity_request_ready
+     sget-object v0, Lcom/meizu/media/camera/camcontroller/i0;->A2:Lcom/meizu/base/utils/b$a;
+ 
+     .line 7
+@@ -63900,6 +63900,37 @@
+     .line 6
+     .line 7
+     .line 8
++    :try_start_client_identity
++    new-instance v2, Landroid/hardware/camera2/CaptureRequest$Key;
++
++    const-string v3, "com.meizu.device.package_name"
++
++    const-class v4, Ljava/lang/String;
++
++    invoke-direct {v2, v3, v4}, Landroid/hardware/camera2/CaptureRequest$Key;-><init>(Ljava/lang/String;Ljava/lang/Class;)V
++
++    invoke-virtual {p2, v2}, Landroid/hardware/camera2/CaptureRequest$Builder;->get(Landroid/hardware/camera2/CaptureRequest$Key;)Ljava/lang/Object;
++
++    move-result-object v3
++
++    if-nez v3, :client_identity_ready
++
++    iget-object v3, p0, Lcom/meizu/media/camera/camcontroller/CameraController;->e:Landroid/content/Context;
++
++    invoke-virtual {v3}, Landroid/content/Context;->getOpPackageName()Ljava/lang/String;
++
++    move-result-object v3
++
++    invoke-virtual {p2, v2, v3}, Landroid/hardware/camera2/CaptureRequest$Builder;->set(Landroid/hardware/camera2/CaptureRequest$Key;Ljava/lang/Object;)V
++    :try_end_client_identity
++    .catch Ljava/lang/IllegalArgumentException; {:try_start_client_identity .. :try_end_client_identity} :client_identity_unsupported
++
++    goto :client_identity_ready
++
++    :client_identity_unsupported
++    move-exception v2
++
++    :client_identity_ready
+     new-instance v0, Landroid/hardware/camera2/params/SessionConfiguration;
+ 
+     .line 9

@@ -1,0 +1,97 @@
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/PreviewHolder.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/PreviewHolder.smali
+@@ -1371,7 +1371,7 @@
+     return-void
+ .end method
+ 
+-.method private final checkReuseImageReader(Landroid/graphics/Point;)Z
++.method private final checkReuseImageReader(Landroid/graphics/Point;J)Z
+     .locals 3
+ 
+     .line 1
+@@ -1380,6 +1380,22 @@
+     .line 2
+     .line 3
+     if-eqz p0, :cond_2
++
++    invoke-virtual {p0}, Landroid/media/ImageReader;->getImageFormat()I
++
++    move-result v0
++
++    const/16 v1, 0x22
++
++    if-ne v0, v1, :cond_0
++
++    invoke-virtual {p0}, Landroid/media/ImageReader;->getUsage()J
++
++    move-result-wide v0
++
++    cmp-long v0, v0, p2
++
++    if-nez v0, :cond_0
+ 
+     .line 4
+     .line 5
+@@ -4240,6 +4256,18 @@
+ .end method
+ 
+ .method public final getPreviewSurface(Landroid/graphics/Point;)Landroid/view/Surface;
++    .locals 2
++
++    const-wide/16 v0, 0x103
++
++    invoke-virtual {p0, p1, v0, v1}, Lcom/meizu/media/camera/camcontroller/PreviewHolder;->getPreviewSurface(Landroid/graphics/Point;J)Landroid/view/Surface;
++
++    move-result-object p0
++
++    return-object p0
++.end method
++
++.method public final getPreviewSurface(Landroid/graphics/Point;J)Landroid/view/Surface;
+     .locals 7
+ 
+     .line 1
+@@ -4252,7 +4280,7 @@
+     .line 4
+     .line 5
+     .line 6
+-    invoke-direct {p0, p1}, Lcom/meizu/media/camera/camcontroller/PreviewHolder;->checkReuseImageReader(Landroid/graphics/Point;)Z
++    invoke-direct {p0, p1, p2, p3}, Lcom/meizu/media/camera/camcontroller/PreviewHolder;->checkReuseImageReader(Landroid/graphics/Point;J)Z
+ 
+     .line 7
+     .line 8
+@@ -4318,7 +4346,7 @@
+     const/4 v4, 0x3
+ 
+     .line 39
+-    const-wide/16 v5, 0x100
++    move-wide v5, p2
+ 
+     .line 40
+     .line 41
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali
+@@ -321,8 +321,22 @@
+ 
+     .line 120
+     .line 121
+-    invoke-virtual {v7, v8}, Lcom/meizu/media/camera/camcontroller/PreviewHolder;->getPreviewSurface(Landroid/graphics/Point;)Landroid/view/Surface;
++    invoke-static {v6}, Lcom/meizu/media/camera/camcontroller/i0;->s3(Lcom/meizu/media/camera/camcontroller/i0;)Z
++
++    move-result v9
++
++    if-eqz v9, :readable_video_preview
++
++    const-wide/16 v9, 0x100
++
++    goto :video_preview_usage_ready
+ 
++    :readable_video_preview
++    const-wide/16 v9, 0x103
++
++    :video_preview_usage_ready
++    invoke-virtual {v7, v8, v9, v10}, Lcom/meizu/media/camera/camcontroller/PreviewHolder;->getPreviewSurface(Landroid/graphics/Point;J)Landroid/view/Surface;
++
+     .line 122
+     .line 123
+     .line 124

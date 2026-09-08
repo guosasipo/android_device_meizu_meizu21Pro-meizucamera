@@ -1,0 +1,240 @@
+diff --git a/smali_classes2/com/meizu/media/camera/camcontroller/i0$a0.smali b/smali_classes2/com/meizu/media/camera/camcontroller/i0$a0.smali
+index 9a43700..ca96e71 100644
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/i0$a0.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/i0$a0.smali
+@@ -676,6 +676,18 @@
+     .line 310
+     invoke-static {v2, v4, v5, v6}, Lcom/meizu/media/camera/camcontroller/i0;->F7(Lcom/meizu/media/camera/camcontroller/i0;Landroid/hardware/camera2/CaptureRequest$Builder;Lcom/meizu/media/camera/data/ParamData;I)V
+ 
++    iget-object v2, p0, Lcom/meizu/media/camera/camcontroller/i0$a0;->a:Lcom/meizu/media/camera/data/ParamData;
++
++    iget-boolean v2, v2, Lcom/meizu/camera/effectlib/utils/BaseParamData;->mIsManualHighPic:Z
++
++    if-eqz v2, :manual_high_sensor_pixel_mode_ready
++
++    sget-object v2, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    invoke-virtual {v4, v2, v1}, Landroid/hardware/camera2/CaptureRequest$Builder;->set(Landroid/hardware/camera2/CaptureRequest$Key;Ljava/lang/Object;)V
++
++    :manual_high_sensor_pixel_mode_ready
++
+     .line 311
+     .line 312
+     .line 313
+@@ -906,6 +918,12 @@
+     .line 418
+     :goto_4
+     :try_start_2
++    iget-object v5, p0, Lcom/meizu/media/camera/camcontroller/i0$a0;->a:Lcom/meizu/media/camera/data/ParamData;
++
++    iget-boolean v5, v5, Lcom/meizu/camera/effectlib/utils/BaseParamData;->mIsManualHighPic:Z
++
++    if-nez v5, :cond_d
++
+     iget-object v5, p0, Lcom/meizu/media/camera/camcontroller/i0$a0;->c:Lcom/meizu/media/camera/camcontroller/i0;
+ 
+     .line 419
+diff --git a/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali b/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali
+index 09be62c..29bb3b4 100644
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/i0$a1.smali
+@@ -1414,6 +1414,21 @@
+ 
+     .line 664
+     :goto_4
++    sget v8, Lcom/meizu/media/camera/util/DeviceHelper;->P4:I
++
++    if-ne v6, v8, :video_sensor_pixel_mode_ready
++
++    iget-object v8, v1, Lcom/meizu/media/camera/camcontroller/i0$a1;->g:Lcom/meizu/media/camera/camcontroller/i0;
++
++    invoke-static {v8}, Lcom/meizu/media/camera/camcontroller/i0;->m4(Lcom/meizu/media/camera/camcontroller/i0;)Landroid/hardware/camera2/CaptureRequest$Builder;
++
++    move-result-object v8
++
++    sget-object v9, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    invoke-virtual {v8, v9, v2}, Landroid/hardware/camera2/CaptureRequest$Builder;->set(Landroid/hardware/camera2/CaptureRequest$Key;Ljava/lang/Object;)V
++
++    :video_sensor_pixel_mode_ready
+     invoke-static {}, Lcom/meizu/media/camera/camcontroller/i0;->a()Lcom/meizu/base/utils/b$a;
+ 
+     .line 665
+diff --git a/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali b/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali
+index aa884ab..eba599d 100644
+--- a/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali
++++ b/smali_classes2/com/meizu/media/camera/camcontroller/i0.smali
+@@ -45558,12 +45558,54 @@
+ 
+     .line 151
+     .line 152
+-    if-nez v7, :cond_7
+-
+-    .line 153
+-    .line 154
+     invoke-virtual {v0}, Lcom/meizu/media/camera/camcontroller/i0;->aa()V
+ 
++    iget-object v8, v0, Lcom/meizu/media/camera/camcontroller/i0;->W:Landroid/graphics/Rect;
++
++    if-eqz v7, :sensor_coordinate_changed
++
++    invoke-virtual {v7, v8}, Landroid/graphics/Rect;->equals(Ljava/lang/Object;)Z
++
++    move-result v7
++
++    if-nez v7, :sensor_coordinate_ready
++
++    :sensor_coordinate_changed
++    new-instance v7, Landroid/graphics/Rect;
++
++    invoke-direct {v7, v8}, Landroid/graphics/Rect;-><init>(Landroid/graphics/Rect;)V
++
++    iput-object v7, v0, Lcom/meizu/media/camera/camcontroller/i0;->Q1:Landroid/graphics/Rect;
++
++    const/4 v7, 0x0
++
++    iput-object v7, v0, Lcom/meizu/media/camera/camcontroller/i0;->R1:Landroid/graphics/Rect;
++
++    :sensor_coordinate_ready
++    sget-object v7, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    invoke-virtual {v5, v7}, Landroid/hardware/camera2/CaptureRequest$Builder;->get(Landroid/hardware/camera2/CaptureRequest$Key;)Ljava/lang/Object;
++
++    move-result-object v7
++
++    check-cast v7, Ljava/lang/Integer;
++
++    if-eqz v7, :cond_7
++
++    invoke-virtual {v7}, Ljava/lang/Integer;->intValue()I
++
++    move-result v7
++
++    const/4 v8, 0x1
++
++    if-ne v7, v8, :cond_7
++
++    sget-object v7, Landroid/hardware/camera2/CaptureRequest;->SCALER_CROP_REGION:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    iget-object v8, v0, Lcom/meizu/media/camera/camcontroller/i0;->W:Landroid/graphics/Rect;
++
++    invoke-virtual {v5, v7, v8}, Landroid/hardware/camera2/CaptureRequest$Builder;->set(Landroid/hardware/camera2/CaptureRequest$Key;Ljava/lang/Object;)V
++
+     .line 155
+     .line 156
+     .line 157
+@@ -47736,12 +47778,41 @@
+     .line 279
+     :catch_0
+     :cond_6
++    iget-object v3, p0, Lcom/meizu/media/camera/camcontroller/i0;->K:Landroid/hardware/camera2/CaptureRequest$Builder;
++
++    if-eqz v3, :sensor_coordinate_default
++
++    sget-object v4, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    invoke-virtual {v3, v4}, Landroid/hardware/camera2/CaptureRequest$Builder;->get(Landroid/hardware/camera2/CaptureRequest$Key;)Ljava/lang/Object;
++
++    move-result-object v3
++
++    check-cast v3, Ljava/lang/Integer;
++
++    if-eqz v3, :sensor_coordinate_default
++
++    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
++
++    move-result v3
++
++    const/4 v4, 0x1
++
++    if-ne v3, v4, :sensor_coordinate_default
++
++    iget-object v0, p0, Lcom/meizu/media/camera/camcontroller/i0;->w:Landroid/hardware/camera2/CameraCharacteristics;
++
++    sget-object v1, Landroid/hardware/camera2/CameraCharacteristics;->SENSOR_INFO_ACTIVE_ARRAY_SIZE_MAXIMUM_RESOLUTION:Landroid/hardware/camera2/CameraCharacteristics$Key;
++
++    goto :sensor_coordinate_key_ready
++
++    :sensor_coordinate_default
+     iget-object v0, p0, Lcom/meizu/media/camera/camcontroller/i0;->w:Landroid/hardware/camera2/CameraCharacteristics;
+ 
+-    .line 280
+-    .line 281
+     sget-object v1, Landroid/hardware/camera2/CameraCharacteristics;->SENSOR_INFO_ACTIVE_ARRAY_SIZE:Landroid/hardware/camera2/CameraCharacteristics$Key;
+ 
++    :sensor_coordinate_key_ready
++
+     .line 282
+     .line 283
+     invoke-virtual {v0, v1}, Landroid/hardware/camera2/CameraCharacteristics;->get(Landroid/hardware/camera2/CameraCharacteristics$Key;)Ljava/lang/Object;
+@@ -47754,6 +47825,20 @@
+     .line 287
+     check-cast v0, Landroid/graphics/Rect;
+ 
++    if-nez v0, :sensor_coordinate_rect_ready
++
++    iget-object v0, p0, Lcom/meizu/media/camera/camcontroller/i0;->w:Landroid/hardware/camera2/CameraCharacteristics;
++
++    sget-object v1, Landroid/hardware/camera2/CameraCharacteristics;->SENSOR_INFO_ACTIVE_ARRAY_SIZE:Landroid/hardware/camera2/CameraCharacteristics$Key;
++
++    invoke-virtual {v0, v1}, Landroid/hardware/camera2/CameraCharacteristics;->get(Landroid/hardware/camera2/CameraCharacteristics$Key;)Ljava/lang/Object;
++
++    move-result-object v0
++
++    check-cast v0, Landroid/graphics/Rect;
++
++    :sensor_coordinate_rect_ready
++
+     .line 288
+     .line 289
+     new-instance v1, Landroid/graphics/Rect;
+@@ -52171,6 +52256,40 @@
+     .line 77
+     .line 78
+     .line 79
++    sget-object p2, Lcom/meizu/media/camera/mode/CameraModeType$ModeType;->VIDEO:Lcom/meizu/media/camera/mode/CameraModeType$ModeType;
++
++    invoke-static {p2}, Lcom/meizu/media/camera/mode/CameraModeType;->B(Lcom/meizu/media/camera/mode/CameraModeType$ModeType;)Z
++
++    move-result p2
++
++    if-eqz p2, :sensor_pixel_mode_ready
++
++    sget-object p2, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    iget-object p3, p0, Lcom/meizu/media/camera/camcontroller/i0;->K:Landroid/hardware/camera2/CaptureRequest$Builder;
++
++    invoke-static {p1, p2, p3}, Lcom/meizu/media/camera/util/CameraKeyExKt;->copy(Landroid/hardware/camera2/CaptureRequest$Builder;Landroid/hardware/camera2/CaptureRequest$Key;Landroid/hardware/camera2/CaptureRequest$Builder;)V
++
++    :sensor_pixel_mode_ready
++    sget-object p2, Landroid/hardware/camera2/CaptureRequest;->SENSOR_PIXEL_MODE:Landroid/hardware/camera2/CaptureRequest$Key;
++
++    invoke-virtual {p1, p2}, Landroid/hardware/camera2/CaptureRequest$Builder;->get(Landroid/hardware/camera2/CaptureRequest$Key;)Ljava/lang/Object;
++
++    move-result-object p2
++
++    check-cast p2, Ljava/lang/Integer;
++
++    if-eqz p2, :copy_crop_region
++
++    invoke-virtual {p2}, Ljava/lang/Integer;->intValue()I
++
++    move-result p2
++
++    const/4 p3, 0x1
++
++    if-eq p2, p3, :crop_region_ready
++
++    :copy_crop_region
+     sget-object p2, Landroid/hardware/camera2/CaptureRequest;->SCALER_CROP_REGION:Landroid/hardware/camera2/CaptureRequest$Key;
+ 
+     .line 80
+@@ -52181,6 +52300,8 @@
+     .line 83
+     invoke-static {p1, p2, p3}, Lcom/meizu/media/camera/util/CameraKeyExKt;->copy(Landroid/hardware/camera2/CaptureRequest$Builder;Landroid/hardware/camera2/CaptureRequest$Key;Landroid/hardware/camera2/CaptureRequest$Builder;)V
+ 
++    :crop_region_ready
++
+     .line 84
+     .line 85
+     .line 86
