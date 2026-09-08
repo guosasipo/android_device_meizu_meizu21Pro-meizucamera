@@ -1,0 +1,20 @@
+--- a/smali_classes2/q4/f.smali
++++ b/smali_classes2/q4/f.smali
+@@ -178,7 +178,7 @@
+ 
+     .line 84
+     .line 85
+-    sput-boolean v0, Lcom/meizu/media/camera/util/DeviceHelper;->P:Z
++    sput-boolean v1, Lcom/meizu/media/camera/util/DeviceHelper;->P:Z
+ 
+     .line 86
+     .line 87
+@@ -1830,7 +1830,7 @@
+ 
+     .line 930
+     .line 931
+-    sput-boolean v0, Lcom/meizu/media/camera/util/DeviceHelper;->n6:Z
++    sput-boolean v1, Lcom/meizu/media/camera/util/DeviceHelper;->n6:Z
+ 
+     .line 932
+     .line 933

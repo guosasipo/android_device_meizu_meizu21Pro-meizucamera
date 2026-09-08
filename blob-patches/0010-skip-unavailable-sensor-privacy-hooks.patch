@@ -1,0 +1,27 @@
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -64,2 +64 @@
+-    <uses-permission android:name="android.permission.OBSERVE_SENSOR_PRIVACY"/>
+     <uses-permission android:name="android.permission.CONTROL_DEVICE_LIGHTS"/>
+--- a/smali_classes2/com/meizu/media/camera/CameraActivity.smali
++++ b/smali_classes2/com/meizu/media/camera/CameraActivity.smali
+@@ -1608,6 +1608,8 @@
+ 
+     .line 12
+     invoke-virtual {v1, v2}, Lcom/meizu/media/camera/camcontroller/CameraController;->Z0(Z)V
++
++    return-void
+ 
+     .line 13
+     .line 14
+--- a/smali_classes2/com/meizu/media/camera/simplify/CameraSimplifyActivity.smali
++++ b/smali_classes2/com/meizu/media/camera/simplify/CameraSimplifyActivity.smali
+@@ -1525,6 +1525,8 @@
+ 
+     .line 12
+     invoke-virtual {v1, v2}, Lcom/meizu/media/camera/simplify/CameraSimplifyControllerBase;->c0(Z)V
++
++    return-void
+ 
+     .line 13
+     .line 14
