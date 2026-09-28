@@ -69,7 +69,7 @@
      <uses-permission android:name="android.permission.OBSERVE_SENSOR_PRIVACY"/>
 -    <uses-permission android:name="com.meizu.permission.FLYME_LINK_UNION"/>
      <uses-permission android:name="android.permission.CONTROL_DEVICE_LIGHTS"/>
-     <uses-feature android:glEsVersion="0x00030000" android:required="true"/>
+     <uses-feature android:glEsVersion="0x30000" android:required="true"/>
      <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
      <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
      <uses-permission android:name="android.permission.TETHER_PRIVILEGED"/>
@@ -104,7 +104,7 @@
 -                <category android:name="android.intent.category.DEFAULT"/>
 -            </intent-filter>
          </activity>
-         <activity android:clearTaskOnLaunch="true" android:configChanges="keyboardHidden|orientation|screenSize|uiMode" android:exported="true" android:icon="@mipmap/ic_launcher_camera_round" android:launchMode="singleTask" android:name="com.meizu.media.camera.CameraStillImageCaptureActivity" android:screenOrientation="portrait" android:taskAffinity="com.meizu.media.camera.CameraActivity" android:theme="@style/Theme.Camera" android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+         <activity android:clearTaskOnLaunch="true" android:configChanges="keyboardHidden|orientation|uiMode|screenSize" android:exported="true" android:icon="@mipmap/ic_launcher_camera_round" android:launchMode="singleTask" android:name="com.meizu.media.camera.CameraStillImageCaptureActivity" android:screenOrientation="portrait" android:taskAffinity="com.meizu.media.camera.CameraActivity" android:theme="@style/Theme.Camera" android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
              <intent-filter>
 @@ -230,10 +189,6 @@
                  <category android:name="android.intent.category.DEFAULT"/>
@@ -198,7 +198,6 @@
          <provider android:authorities="com.meizu.media.camera.renderfilter-startup" android:exported="false" android:name="com.flyme.renderfilter.InitializationProvider"/>
      </application>
  </manifest>
-\ No newline at end of file
 --- a/smali_classes2/com/meizu/media/camera/CameraActivity.smali
 +++ b/smali_classes2/com/meizu/media/camera/CameraActivity.smali
 @@ -4625,40 +4625,8 @@

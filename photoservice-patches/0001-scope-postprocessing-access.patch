@@ -1,7 +1,6 @@
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -1,28 +1,8 @@
- <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="36" android:compileSdkVersionCodename="16" package="com.meizu.media.imageservice" platformBuildVersionCode="36" platformBuildVersionName="16">
+@@ -3,27 +3,7 @@
      <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 -    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 -    <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -32,40 +31,33 @@
          <uses-native-library android:name="libOpenCL.so" android:required="false"/>
          <uses-native-library android:name="libcdsprpc.so" android:required="false"/>
          <uses-native-library android:name="vendor.qti.hardware.dsp@1.0.so" android:required="false"/>
-@@ -33,25 +12,24 @@
+@@ -34,25 +14,24 @@
                  <data android:mimeType="image/*"/>
              </intent-filter>
          </activity>
--        <service android:exported="true" android:foregroundServiceType="" android:name="com.meizu.media.imageservice.refocus.arcrefocus.RefocusNewService">
+-        <service android:exported="true" android:foregroundServiceType="shortService" android:name="com.meizu.media.imageservice.refocus.arcrefocus.RefocusNewService">
 +        <service android:exported="true" android:foregroundServiceType="dataSync" android:name="com.meizu.media.imageservice.refocus.arcrefocus.RefocusNewService">
              <intent-filter>
                  <action android:name="com.meizu.media.imageservice.ARC_REFOCUS_REQUEST"/>
                  <data android:mimeType="image/*"/>
              </intent-filter>
          </service>
--        <service android:exported="true" android:foregroundServiceType="" android:name="com.meizu.media.imageservice.refocus.DualBokehService">
+-        <service android:exported="true" android:foregroundServiceType="specialUse" android:name="com.meizu.media.imageservice.refocus.DualBokehService">
 -            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="dual bokeh"/>
 +        <service android:exported="true" android:foregroundServiceType="dataSync" android:name="com.meizu.media.imageservice.refocus.DualBokehService">
              <intent-filter>
                  <action android:name="com.meizu.media.imageservice.dualbokeh"/>
              </intent-filter>
          </service>
--        <service android:exported="true" android:foregroundServiceType="" android:name="com.meizu.media.imageservice.refocus.bstrefocus.BSTOrderService">
+-        <service android:exported="true" android:foregroundServiceType="shortService" android:name="com.meizu.media.imageservice.refocus.bstrefocus.BSTOrderService">
 +        <service android:exported="true" android:name="com.meizu.media.imageservice.refocus.bstrefocus.BSTOrderService">
              <intent-filter>
                  <action android:name="com.meizu.media.imageservice.BST_REFOCUS_OBSERVER_REQUEST"/>
                  <data android:mimeType="image/*"/>
              </intent-filter>
          </service>
--        <service android:exported="true" android:foregroundServiceType="" android:name="com.meizu.media.imageservice.refocus.arctof.TofProcessService">
+-        <service android:exported="true" android:foregroundServiceType="shortService" android:name="com.meizu.media.imageservice.refocus.arctof.TofProcessService">
 +        <service android:exported="true" android:foregroundServiceType="dataSync" android:name="com.meizu.media.imageservice.refocus.arctof.TofProcessService">
              <intent-filter>
                  <action android:name="com.meizu.media.imageservice.TOF_PROCESS_REQUEST"/>
                  <data android:mimeType="image/*"/>
-@@ -76,4 +54,4 @@
-         </provider>
-         <service android:exported="true" android:name="com.meizu.savior.SaviorJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
-     </application>
--</manifest>
-\ No newline at end of file
-+</manifest>

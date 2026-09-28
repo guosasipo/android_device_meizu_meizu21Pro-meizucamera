@@ -5,7 +5,7 @@
      <uses-permission android:name="com.meizu.media.gallery.fm.FilterManage"/>
      <uses-permission android:name="android.permission.CONTROL_DEVICE_LIGHTS"/>
 +    <uses-permission android:name="org.meizu.awlight.permission.CAMERA_LIGHT"/>
-     <uses-feature android:glEsVersion="0x00030000" android:required="true"/>
+     <uses-feature android:glEsVersion="0x30000" android:required="true"/>
      <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
      <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
 --- a/smali_classes2/com/meizu/media/camera/light/CameraLightManager.smali

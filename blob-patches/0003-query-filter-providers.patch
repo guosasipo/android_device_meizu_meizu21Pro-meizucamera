@@ -1,17 +1,9 @@
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -1,6 +1,7 @@
- <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="36" android:compileSdkVersionCodename="16" package="com.meizu.media.camera" platformBuildVersionCode="36" platformBuildVersionName="16">
+@@ -3,5 +3,6 @@
      <compatible-screens/>
      <queries>
 +        <provider android:authorities="com.meizu.media.gallery.filtercomp;com.meizu.media.gallery.classic-filtermanager;com.meizu.media.gallery.filtermanager"/>
          <package android:name="com.meizu.media.gallery"/>
          <package android:name="com.tencent.mm"/>
          <package android:name="com.eg.android.AlipayGphone"/>
-@@ -335,4 +336,4 @@
-         <service android:enabled="true" android:exported="true" android:name="com.upuphone.starrynetsdk.ability.lifecycle.service.LifecycleService"/>
-         <provider android:authorities="com.meizu.media.camera.renderfilter-startup" android:exported="false" android:name="com.flyme.renderfilter.InitializationProvider"/>
-     </application>
--</manifest>
-\ No newline at end of file
-+</manifest>
